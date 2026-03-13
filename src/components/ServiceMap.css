@@ -1,0 +1,46 @@
+.service-map .topology-map {
+  width: 100%;
+  height: 250px;
+}
+
+.service-map .legend {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+}
+
+.status-dot {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-dot.healthy { color: #10b981; }
+.status-dot.warning { color: #f59e0b; }
+.status-dot.critical { color: #dc2626; }
+
+.service-stats {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.service-stat {
+  text-align: center;
+}
+
+.service-stat .count {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.service-stat .count.healthy { color: #10b981; }
+.service-stat .count.warning { color: #f59e0b; }
+.service-stat .count.critical { color: #dc2626; }
+
+.service-stat .label {
+  font-size: 12px;
+  color: #6b7280;
+}

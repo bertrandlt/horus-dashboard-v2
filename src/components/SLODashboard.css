@@ -1,0 +1,105 @@
+.slo-dashboard .slo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.slo-card {
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.slo-card.met { border-color: #10b981; background: #ecfdf5; }
+.slo-card.at-risk { border-color: #f59e0b; background: #fffbeb; }
+.slo-card.breached { border-color: #dc2626; background: #fef2f2; }
+
+.slo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.slo-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.slo-status {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.slo-metrics {
+  margin-bottom: 8px;
+}
+
+.slo-current {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.slo-current .value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.slo-current .unit {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.slo-target {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.slo-progress {
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.slo-period {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.slo-summary {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.summary-item {
+  text-align: center;
+}
+
+.summary-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.summary-value.met { color: #10b981; }
+.summary-value.at-risk { color: #f59e0b; }
+.summary-value.breached { color: #dc2626; }
+
+.summary-label {
+  font-size: 11px;
+  color: #6b7280;
+}
