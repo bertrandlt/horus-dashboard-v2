@@ -3,7 +3,8 @@ module.exports = {
     {
       name: 'horus-dashboard-prod',
       script: 'npm',
-      args: 'start',
+      args: 'run preview -- --host 0.0.0.0 --port 8082',
+      cwd: '/home/ubuntu/.openclaw/workspace/dashboard-v2',
       env: {
         NODE_ENV: 'production',
         PORT: 8082,
@@ -24,7 +25,8 @@ module.exports = {
     {
       name: 'horus-dashboard-dev',
       script: 'npm',
-      args: 'start',
+      args: 'run dev -- --host 0.0.0.0 --port 8083',
+      cwd: '/home/ubuntu/.openclaw/workspace/dashboard-v2',
       env: {
         NODE_ENV: 'development',
         PORT: 8083,
@@ -35,7 +37,7 @@ module.exports = {
       },
       instances: 1,
       autorestart: true,
-      watch: true,
+      watch: false,
       ignore_watch: ['node_modules', 'logs', '.git'],
       max_memory_restart: '1G',
       error_file: './logs/pm2-dev-err.log',
