@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ServersPanel.css';
+import { ServerDetailModal } from './ServerDetailModal';
 
 interface Server {
   id: string;
@@ -20,8 +21,10 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://192.168.100.30:3002';
 
 export const ServersPanel: React.FC = () => {
   const [servers, setServers] = useState<Server[]>([]);
-  const [selectedServer, setSelectedServer] = useState<string | null>(null);
+  const [selectedServerId, setSelectedServerId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const selectedServer = servers.find(s => s.id === selectedServerId) || null;
 
   useEffect(() => {
     const fetchServers = async () => {
@@ -88,8 +91,8 @@ export const ServersPanel: React.FC = () => {
         {servers.map(server => (
           <div 
             key={server.id} 
-            className={`server-card ${server.status} ${selectedServer === server.id ? 'selected' : ''}`}
-            onClick={() => setSelectedServer(selectedServer === server.id ? null : server.id)}
+            className={`server-card ${server.status} ${selectedServerId === server.id ? 'selected' : ''}`}
+            onClick={() => setSelectedServerId(selectedServerId === server.id ? null : server.id)}
           >
             <div className="server-header">
               <div className="server-info">
@@ -150,6 +153,14 @@ export const ServersPanel: React.FC = () => {
           </div>
         ))}
       </div>
+
+      {/* Modal de détails du serveur */}
+      {selectedServer && (
+        <ServerDetailModal
+          server={selectedServer}
+          onClose={() => setSelectedServerId(null)}
+        />
+      )}
 
       <div className="servers-footer">
         <div className="stats-row">
