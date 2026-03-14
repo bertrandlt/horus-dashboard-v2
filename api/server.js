@@ -133,7 +133,10 @@ app.get('/api/servers', (req, res) => {
     cpu: s.cpu,
     memory: s.memory,
     disk: s.disk,
-    lastSeen: s.lastSeen
+    lastSeen: s.lastSeen,
+	  cpuModel: s.cpuModel,
+      ramTotalGb: s.ramTotalGb,
+      diskTotalGb: s.diskTotalGb
   }));
   res.json(serverList);
 });
