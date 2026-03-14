@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ServersPanel.css';
 import { ServerDetailModal } from './ServerDetailModal';
+import serverSpecs from '../../config/servers.json';
 
 interface Server {
   id: string;
@@ -19,6 +20,19 @@ interface Server {
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://192.168.100.30:3002';
 
+// Merge API data with local server specifications
+const mergeServerSpecs = (servers: any[]): Server[] => {
+  return servers.map(server => {
+    const specs = (serverSpecs as any).servers[server.id] || {};
+    return {
+      ...server,
+      cpuModel: server.cpuModel || specs.cpuModel,
+      ramTotalGb: server.ramTotalGb || specs.ramTotalGb,
+      diskTotalGb: server.diskTotalGb || specs.diskTotalGb
+    };
+  });
+};
+
 export const ServersPanel: React.FC = () => {
   const [servers, setServers] = useState<Server[]>([]);
   const [selectedServerId, setSelectedServerId] = useState<string | null>(null);
@@ -31,7 +45,7 @@ export const ServersPanel: React.FC = () => {
       try {
         const response = await fetch(`${API_URL}/api/servers`);
         const data = await response.json();
-        setServers(data);
+        setServers(mergeServerSpecs(data));
       } catch (err) {
         console.error('Failed to fetch servers:', err);
       } finally {
