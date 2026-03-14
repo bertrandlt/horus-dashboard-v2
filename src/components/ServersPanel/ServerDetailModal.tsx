@@ -65,14 +65,6 @@ export const ServerDetailModal: React.FC<ServerDetailModalProps> = ({ server, on
     return `${gb} GB`;
   };
 
-  const formatTimestamp = (timestamp: string): string => {
-    const date = new Date(timestamp);
-    if (timeRange === '1h') {
-      return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-    }
-    return date.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', hour: '2-digit' });
-  };
-
   const getMetricColor = (value: number, threshold: number = 80): string => {
     if (value >= 90) return '#dc2626';
     if (value >= threshold) return '#f59e0b';
@@ -348,7 +340,6 @@ function createAreaPath(data: number[], width: number, height: number): string {
   });
 
   const pathStart = points[0] || `0,${height}`;
-  const pathEnd = points[points.length - 1] || `${width},${height}`;
   
   return `M ${pathStart} L ${points.join(' L ')} L ${width},${height} L 0,${height} Z`;
 }
