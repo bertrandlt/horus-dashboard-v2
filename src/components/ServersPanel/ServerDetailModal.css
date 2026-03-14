@@ -208,10 +208,80 @@
   gap: 8px;
 }
 
-.metric-card-sub {
-  font-size: 14px;
+.metric-card-value-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.metric-card-total {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.total-label {
   color: #64748b;
-  font-weight: 400;
+  font-weight: 500;
+}
+
+.total-value {
+  color: #f1f5f9;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.used-label {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.metric-card-used {
+  font-size: 16px;
+  color: #10b981;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.metric-card-info {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.metric-card-info-label {
+  font-weight: 500;
+}
+
+.metric-card-info-value {
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.metric-card-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.stat-item {
+  display: flex;
+  gap: 4px;
+}
+
+.stat-label {
+  font-weight: 500;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: #f1f5f9;
 }
 
 .metric-card-details {

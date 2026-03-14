@@ -144,9 +144,21 @@ export const ServerDetailModal: React.FC<ServerDetailModalProps> = ({ server, on
                   <div className="metric-card-value" style={{ color: getMetricColor(server.cpu || 0) }}>
                     {server.cpu !== undefined ? `${server.cpu}%` : 'N/A'}
                   </div>
-                  <div className="metric-card-details">
-                    <span>Moy: {avgCpu.toFixed(1)}%</span>
-                    <span>Max: {maxCpu}%</span>
+                  {server.cpuModel && (
+                    <div className="metric-card-info">
+                      <span className="metric-card-info-label">Modèle:</span>
+                      <span className="metric-card-info-value">{server.cpuModel}</span>
+                    </div>
+                  )}
+                  <div className="metric-card-stats">
+                    <div className="stat-item">
+                      <span className="stat-label">Moy:</span>
+                      <span className="stat-value">{avgCpu.toFixed(1)}%</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">Max:</span>
+                      <span className="stat-value">{maxCpu}%</span>
+                    </div>
                   </div>
                   <div className="progress-bar">
                     <div 
@@ -161,17 +173,32 @@ export const ServerDetailModal: React.FC<ServerDetailModalProps> = ({ server, on
                     <span className="metric-card-icon">🧠</span>
                     <span className="metric-card-label">RAM</span>
                   </div>
-                  <div className="metric-card-value" style={{ color: getMetricColor(server.memory || 0) }}>
-                    {server.memory !== undefined ? `${server.memory}%` : 'N/A'}
+                  <div className="metric-card-value-wrapper">
+                    <div className="metric-card-value" style={{ color: getMetricColor(server.memory || 0) }}>
+                      {server.memory !== undefined ? `${server.memory}%` : 'N/A'}
+                    </div>
                     {server.ramTotalGb && (
-                      <span className="metric-card-sub">
-                        / {((server.memory || 0) * server.ramTotalGb / 100).toFixed(1)} GB
-                      </span>
+                      <div className="metric-card-total">
+                        <span className="total-label">Total:</span>
+                        <span className="total-value">{server.ramTotalGb} GB</span>
+                        <span className="used-label">• Utilisé:</span>
+                      </div>
+                    )}
+                    {server.ramTotalGb && server.memory !== undefined && (
+                      <div className="metric-card-used">
+                        {((server.memory) * server.ramTotalGb / 100).toFixed(1)} GB
+                      </div>
                     )}
                   </div>
-                  <div className="metric-card-details">
-                    <span>Moy: {avgMemory.toFixed(1)}%</span>
-                    <span>Max: {maxMemory}%</span>
+                  <div className="metric-card-stats">
+                    <div className="stat-item">
+                      <span className="stat-label">Moy:</span>
+                      <span className="stat-value">{avgMemory.toFixed(1)}%</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">Max:</span>
+                      <span className="stat-value">{maxMemory}%</span>
+                    </div>
                   </div>
                   <div className="progress-bar">
                     <div 
@@ -186,17 +213,32 @@ export const ServerDetailModal: React.FC<ServerDetailModalProps> = ({ server, on
                     <span className="metric-card-icon">💾</span>
                     <span className="metric-card-label">Disque</span>
                   </div>
-                  <div className="metric-card-value" style={{ color: getMetricColor(server.disk || 0) }}>
-                    {server.disk !== undefined ? `${server.disk}%` : 'N/A'}
+                  <div className="metric-card-value-wrapper">
+                    <div className="metric-card-value" style={{ color: getMetricColor(server.disk || 0) }}>
+                      {server.disk !== undefined ? `${server.disk}%` : 'N/A'}
+                    </div>
                     {server.diskTotalGb && (
-                      <span className="metric-card-sub">
-                        / {formatBytes(server.diskTotalGb * (server.disk || 0) / 100)}
-                      </span>
+                      <div className="metric-card-total">
+                        <span className="total-label">Total:</span>
+                        <span className="total-value">{formatBytes(server.diskTotalGb)}</span>
+                        <span className="used-label">• Utilisé:</span>
+                      </div>
+                    )}
+                    {server.diskTotalGb && server.disk !== undefined && (
+                      <div className="metric-card-used">
+                        {formatBytes(server.diskTotalGb * (server.disk) / 100)}
+                      </div>
                     )}
                   </div>
-                  <div className="metric-card-details">
-                    <span>Moy: {avgDisk.toFixed(1)}%</span>
-                    <span>Max: {server.disk}%</span>
+                  <div className="metric-card-stats">
+                    <div className="stat-item">
+                      <span className="stat-label">Moy:</span>
+                      <span className="stat-value">{avgDisk.toFixed(1)}%</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">Max:</span>
+                      <span className="stat-value">{server.disk}%</span>
+                    </div>
                   </div>
                   <div className="progress-bar">
                     <div 
