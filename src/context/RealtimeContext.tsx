@@ -16,8 +16,8 @@ interface RealtimeContextType {
 
 const RealtimeContext = createContext<RealtimeContextType | undefined>(undefined);
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-const WS_URL = import.meta.env.VITE_WS_URL || 'ws://localhost:3001';
+const API_URL = import.meta.env.VITE_API_URL || 'http://192.168.100.30:8082';
+const WS_URL = import.meta.env.VITE_WS_URL || 'ws://192.168.100.30:8082';
 
 export const RealtimeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [metrics, setMetrics] = useState<MetricData[]>([]);

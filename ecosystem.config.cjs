@@ -2,8 +2,8 @@ module.exports = {
   apps: [
     {
       name: 'horus-dashboard-prod',
-      script: 'npm',
-      args: 'run preview -- --host 0.0.0.0 --port 8082',
+      script: 'node',
+      args: 'api/server.js',
       cwd: '/home/ubuntu/.openclaw/workspace/dashboard-v2',
       env: {
         NODE_ENV: 'production',

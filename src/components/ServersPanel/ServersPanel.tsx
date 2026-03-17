@@ -17,7 +17,7 @@ interface Server {
   lastSeen?: string;
 }
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://192.168.100.30:3002';
+const API_URL = import.meta.env.VITE_API_URL || 'http://192.168.100.30:8082';
 
 export const ServersPanel: React.FC = () => {
   const [servers, setServers] = useState<Server[]>([]);
