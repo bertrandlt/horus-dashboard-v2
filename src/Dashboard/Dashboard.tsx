@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ServiceMap, SLODashboard, AIPanel, ServersPanel, type Insight } from '../components';
 import { HistoricalCharts } from '../components/HistoricalCharts/HistoricalCharts';
+import WebServicesMonitor from '../components/WebServicesMonitor';
 import { useTheme } from '../context/ThemeContext';
 import { useRealtime } from '../context/RealtimeContext';
 import './Dashboard.css';
@@ -52,6 +53,7 @@ const Dashboard: React.FC = () => {
       <nav className="dashboard-nav">
         {[
           { id: 'overview', label: "Vue d'ensemble" },
+          { id: 'web-services', label: 'Web Services' },
           { id: 'metrics', label: 'Métriques' },
           { id: 'logs', label: 'Logs' },
           { id: 'traces', label: 'Traces' },
@@ -98,6 +100,14 @@ const Dashboard: React.FC = () => {
             />
           </div>
         </div>
+        
+        {activeTab === 'web-services' && (
+          <div className="grid-row">
+            <div className="grid-col-12">
+              <WebServicesMonitor />
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
