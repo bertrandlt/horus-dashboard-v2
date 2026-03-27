@@ -6,18 +6,18 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:8084',
+      '/api': 'http://localhost:3003',
       '/ws': {
-        target: 'ws://localhost:8084',
+        target: 'ws://localhost:3003',
         ws: true
       }
     }
   },
   preview: {
     proxy: {
-      '/api': 'http://localhost:8084',
+      '/api': 'http://localhost:3003',
       '/ws': {
-        target: 'ws://localhost:8084',
+        target: 'ws://localhost:3003',
         ws: true
       }
     }

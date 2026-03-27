@@ -53,9 +53,23 @@ export default function WebServicesMonitor() {
   const [error, setError] = useState<string | null>(null);
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
 
+  // API URL configuration - use full URL for production build
+  const getApiUrl = () => {
+    // Check if we're running from static server (production build)
+    const isStaticServer = window.location.port === '8083' || window.location.port === '8082';
+    if (isStaticServer) {
+      const apiPort = window.location.port === '8083' ? '3003' : '3002';
+      return `http://${window.location.hostname}:${apiPort}`;
+    }
+    // Development mode with Vite proxy
+    return '';
+  };
+
+  const API_BASE = getApiUrl();
+
   const fetchStatus = async () => {
     try {
-      const response = await fetch('/api/web-services/status');
+      const response = await fetch(`${API_BASE}/api/web-services/status`);
       if (!response.ok) throw new Error('Failed to fetch status');
       const data = await response.json();
       setStatus(data);
@@ -77,7 +91,12 @@ export default function WebServicesMonitor() {
   // WebSocket connection for real-time updates
   useEffect(() => {
     const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${wsProtocol}//${window.location.host}`;
+    // Use API port for WebSocket in production build
+    const isStaticServer = window.location.port === '8083' || window.location.port === '8082';
+    const wsPort = isStaticServer 
+      ? (window.location.port === '8083' ? '3003' : '3002')
+      : window.location.port;
+    const wsUrl = `${wsProtocol}//${window.location.hostname}:${wsPort}`;
     const ws = new WebSocket(wsUrl);
 
     ws.onmessage = (event) => {
