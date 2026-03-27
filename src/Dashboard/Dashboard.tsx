@@ -29,6 +29,57 @@ const Dashboard: React.FC = () => {
     window.location.reload();
   };
 
+  // Render content based on active tab
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'web-services':
+        return (
+          <div className="grid-row">
+            <div className="grid-col-12">
+              <WebServicesMonitor />
+            </div>
+          </div>
+        );
+      
+      case 'overview':
+      default:
+        return (
+          <>
+            <div className="grid-row">
+              <div className="grid-col-12">
+                <ServersPanel />
+              </div>
+            </div>
+            
+            <div className="grid-row">
+              <div className="grid-col-8">
+                <HistoricalCharts 
+                  period={period} 
+                  onPeriodChange={setPeriod} 
+                />
+              </div>
+              <div className="grid-col-4">
+                <SLODashboard period={`Dernier ${period === '7d' ? '7' : period === '30d' ? '30' : '90'} jours`} />
+              </div>
+            </div>
+            
+            <div className="grid-row">
+              <div className="grid-col-6">
+                <ServiceMap />
+              </div>
+              <div className="grid-col-6">
+                <AIPanel 
+                  onInvestigate={handleInvestigate}
+                  onDismiss={handleDismiss}
+                  onGenerateReport={handleGenerateReport}
+                />
+              </div>
+            </div>
+          </>
+        );
+    }
+  };
+
   return (
     <div className="dashboard">
       <header className="dashboard-header">
@@ -70,44 +121,7 @@ const Dashboard: React.FC = () => {
       </nav>
 
       <main className="dashboard-grid">
-        <div className="grid-row">
-          <div className="grid-col-12">
-            <ServersPanel />
-          </div>
-        </div>
-        
-        <div className="grid-row">
-          <div className="grid-col-8">
-            <HistoricalCharts 
-              period={period} 
-              onPeriodChange={setPeriod} 
-            />
-          </div>
-          <div className="grid-col-4">
-            <SLODashboard period={`Dernier ${period === '7d' ? '7' : period === '30d' ? '30' : '90'} jours`} />
-          </div>
-        </div>
-        
-        <div className="grid-row">
-          <div className="grid-col-6">
-            <ServiceMap />
-          </div>
-          <div className="grid-col-6">
-            <AIPanel 
-              onInvestigate={handleInvestigate}
-              onDismiss={handleDismiss}
-              onGenerateReport={handleGenerateReport}
-            />
-          </div>
-        </div>
-        
-        {activeTab === 'web-services' && (
-          <div className="grid-row">
-            <div className="grid-col-12">
-              <WebServicesMonitor />
-            </div>
-          </div>
-        )}
+        {renderContent()}
       </main>
     </div>
   );
